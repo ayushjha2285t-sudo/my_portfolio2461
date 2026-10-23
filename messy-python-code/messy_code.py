@@ -1,13 +1,10 @@
 def calculate_total(numbers):
-    """Return the sum of all numbers."""
     return sum(numbers)
 
 
 def calculate_average(numbers):
-    """Return the average, or 0 for an empty list."""
     if not numbers:
         return 0
-
     return calculate_total(numbers) / len(numbers)
 
 
@@ -21,6 +18,9 @@ def main():
     print("Total:", total)
     print("Average:", average)
 
+
+if __name__ == "__main__":
+    main()
 
 if __name__ == "__main__":
     main()
