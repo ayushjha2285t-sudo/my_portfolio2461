@@ -123,3 +123,58 @@
   initTheme();
   applyProjectFilters();
 })();
+// Floating chatbot
+const chatToggle = document.getElementById("chat-toggle");
+const chatWindow = document.getElementById("chat-window");
+
+if (chatToggle && chatWindow) {
+    chatToggle.addEventListener("click", function () {
+        chatWindow.hidden = !chatWindow.hidden;
+    });
+}
+// Chatbot send message
+const chatForm = document.getElementById("chat-form");
+const chatInput = document.getElementById("chat-input");
+const chatMessages = document.getElementById("chat-messages");
+
+if (chatForm && chatInput && chatMessages) {
+    chatForm.addEventListener("submit", async function (event) {
+        event.preventDefault();
+
+        const message = chatInput.value.trim();
+        if (!message) return;
+
+        const userMessage = document.createElement("p");
+        userMessage.textContent = "You: " + message;
+        chatMessages.appendChild(userMessage);
+
+        chatInput.value = "";
+
+        const reply = document.createElement("p");
+        reply.textContent = "AI: Thinking...";
+        chatMessages.appendChild(reply);
+
+        try {
+            const response = await fetch("/api/chat", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ message: message })
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data.error || "Request failed");
+            }
+
+            reply.textContent = "AI: " +
+                (data.reply || data.message || "No reply received.");
+        } catch (error) {
+            reply.textContent =
+                "AI: Sorry, chatbot is unavailable. Please try again.";
+            console.error("Chatbot error:", error);
+        }
+    });
+}

@@ -533,3 +533,52 @@ html[data-theme="dark"] .project-tag {
     display: none;
   }
 }
+/* Floating AI Chatbot */
+#chatbot {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 9999;
+  font-family: Arial, sans-serif;
+}
+
+#chat-toggle {
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  padding: 14px 20px;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+#chat-window {
+  width: 300px;
+  height: 350px;
+  margin-bottom: 10px;
+  padding: 15px;
+  border-radius: 12px;
+  background: white;
+  color: #222;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+}
+
+#chat-window[hidden] {
+  display: none;
+}
+
+#chat-messages {
+  height: 250px;
+  overflow-y: auto;
+  margin-bottom: 10px;
+}
+
+#chat-input {
+  width: 65%;
+  padding: 8px;
+}
+
+#chat-send {
+  padding: 8px;
+  cursor: pointer;
+}
